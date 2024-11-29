@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Vault</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+    <h2>Your Vault</h2>
+    <h3>Welcome back, {{ data.username }}</h3>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required multiple>
+        <button type="submit">Upload File</button>
+    </form>
+    <h4>Unique key: {{data.key}}</h4>
+    <h3>Uploaded files.</h3>
+    <form method="POST">
+        {% for file in data.files %}
+            <li>{{ file.original_filename }}</li><a href="{{ url_for('download') }}"><button>Download</button></a><br>
+        {% endfor %}
+        <br>
+    </form>
+    </ol>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
